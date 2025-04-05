@@ -1,247 +1,270 @@
 /**
- * Prophecy Viewer MVP - Script
- * Handles fetching data, category filtering, list population,
- * and displaying selected prophecy pair with robust error handling.
+ * Prophecy Viewer MVP V2 (Multi-File) - Script
+ * Handles fetching category manifest, then category-specific data,
+ * filtering, list population, and display with robust error handling.
  */
 
 // --- DOM Element References ---
+const categoryNavContainer = document.getElementById('category-nav-container'); // Container for category UI
 const prophecyListElement = document.getElementById('prophecy-list');
 const otRefElement = document.getElementById('ot-ref');
 const otTextElement = document.getElementById('ot-prophecy-text');
 const ntRefElement = document.getElementById('nt-ref');
 const ntTextElement = document.getElementById('nt-fulfillment-text');
-const categoryElement = document.getElementById('prophecy-category'); // Added for MVP
+const categoryElement = document.getElementById('prophecy-category');
 const loadingIndicator = document.getElementById('loading-indicator');
 const errorMessageElement = document.getElementById('error-message');
 const prophecyContentElement = document.getElementById('prophecy-content');
-// Assumes a <select> element with this ID exists in index.html for filtering
-const categoryFilterElement = document.getElementById('category-filter');
 
 // --- Global Variables ---
-let allLoadedProphecies = []; // Stores the full fetched dataset
-let filteredProphecies = []; // Stores the currently filtered subset for display
-let currentSelectionIndex = 0; // Tracks the selected index *within the filtered list*
-let categories = []; // To store unique categories found
+let availableCategories = []; // Stores category info { name: "...", file: "..." } from manifest
+let currentCategoryData = []; // Stores prophecy data for the currently loaded category
+let currentSelectionIndex = 0; // Index within the currentCategoryData array
+let currentCategoryFilter = "All Categories"; // Track the selected category name
 
 // --- State Management Helper ---
 /**
- * Updates the visibility of UI elements based on the current state.
- * @param {boolean} isLoading - Is the application currently loading data?
+ * Updates the visibility and content of status UI elements.
+ * @param {boolean} isLoading - Is data (manifest or category) currently loading?
  * @param {string|null} error - An error message string, or null if no error.
+ * @param {string} loadingText - Text to show while loading.
  */
-function updateUIState(isLoading, error = null) {
+function updateStatusUI(isLoading, error = null, loadingText = "Loading...") {
     if (isLoading) {
+        loadingIndicator.textContent = loadingText;
         loadingIndicator.style.display = 'block';
         errorMessageElement.style.display = 'none';
-        prophecyContentElement.style.display = 'none';
-        if (categoryFilterElement) categoryFilterElement.style.display = 'none'; // Hide filter while loading/error
-        prophecyListElement.innerHTML = ''; // Clear list
+        prophecyContentElement.style.display = 'none'; // Hide content while loading/error
     } else if (error) {
         loadingIndicator.style.display = 'none';
         errorMessageElement.textContent = error;
         errorMessageElement.style.display = 'block';
         prophecyContentElement.style.display = 'none';
-        if (categoryFilterElement) categoryFilterElement.style.display = 'none';
-        prophecyListElement.innerHTML = '<li>Error loading data</li>'; // Show error in list area too
-    } else { // Data loaded successfully
+    } else { // Data loaded successfully (manifest or category)
         loadingIndicator.style.display = 'none';
         errorMessageElement.style.display = 'none';
-        prophecyContentElement.style.display = 'block'; // Show content area (details populated separately)
-         if (categoryFilterElement) categoryFilterElement.style.display = 'block'; // Show filter
+        // Content display is handled separately after data is processed
     }
 }
 
-// --- Data Fetching Function ---
+// --- Data Fetching Functions ---
 /**
- * Fetches prophecy data from the prophecies.json file asynchronously.
- * Handles network and parsing errors, updating the UI accordingly.
+ * Fetches the category manifest file (categories.json).
  */
-async function fetchProphecyData() {
-    updateUIState(true); // Show loading
+async function fetchManifest() {
+    updateStatusUI(true, null, "Loading categories...");
 
     try {
-        const response = await fetch('prophecies.json');
+        const response = await fetch('categories.json');
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status} ${response.statusText}`);
         }
-        const data = await response.json();
+        const manifest = await response.json();
 
-        if (!Array.isArray(data) || data.length === 0) {
-            throw new Error('Invalid or empty data format received from prophecies.json.');
+        // Basic validation
+        if (!manifest || !Array.isArray(manifest.categories) || manifest.categories.length === 0) {
+            throw new Error('Invalid or empty format in categories.json.');
         }
 
-        // SUCCESS! Store data
-        allLoadedProphecies = data;
-        // Initial filter shows all prophecies
-        filteredProphecies = [...allLoadedProphecies];
-
-        // Process categories and initialize the UI
+        // SUCCESS! Store categories and process them
+        availableCategories = manifest.categories;
         processCategories();
-        initializeUI();
-        updateUIState(false); // Hide loading, show content elements
+        // Optionally load a default category or wait for user selection
+        // For now, let's wait for user selection or default to showing nothing/prompt
+        updateStatusUI(false); // Hide main loading, show category UI
+        renderProphecyList([]); // Render empty list initially
+        displayDetailedPair(null, "Select a category."); // Prompt user
 
     } catch (error) {
-        console.error('Error fetching or processing prophecy data:', error);
-        updateUIState(false, `Failed to load prophecy data. ${error.message}. Ensure 'prophecies.json' exists, is accessible, contains valid JSON, and includes a 'category' field for each entry.`);
+        console.error('Error fetching or parsing manifest:', error);
+        updateStatusUI(false, `Failed to load category list. ${error.message}`);
     }
 }
 
-// --- Category Processing ---
 /**
- * Extracts unique categories from the loaded data and populates the filter.
+ * Fetches the JSON data file for a specific category.
+ * @param {string} categoryName - The name of the category being loaded.
+ * @param {string|null} filePath - The path to the category's JSON file (or null for 'All').
+ */
+async function fetchCategoryData(categoryName, filePath) {
+    // Special handling for "All Categories" - for now, just clear the list/details
+    if (filePath === null) {
+        currentCategoryFilter = "All Categories";
+        currentCategoryData = []; // Clear data
+        renderProphecyList([]); // Render empty list
+        displayDetailedPair(null, "Select a specific category to view prophecies.");
+        updateCategorySelectionVisuals(); // Update visuals
+        return; // Stop here for "All Categories"
+    }
+
+    updateStatusUI(true, null, `Loading ${categoryName}...`); // Show loading specifically for category
+    prophecyListElement.innerHTML = '<li>Loading...</li>'; // Clear list while fetching
+
+    try {
+        const response = await fetch(filePath);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status} ${response.statusText} for ${filePath}`);
+        }
+        const data = await response.json();
+
+        if (!Array.isArray(data)) { // Allow empty array for categories with 0 pairs
+            throw new Error(`Invalid data format in ${filePath}. Expected an array.`);
+        }
+
+        // SUCCESS! Store data, update state, render UI
+        currentCategoryData = data;
+        currentCategoryFilter = categoryName;
+        currentSelectionIndex = 0; // Reset selection to the first item
+        renderProphecyList(currentCategoryData);
+        updateStatusUI(false); // Hide loading indicator
+        updateCategorySelectionVisuals();
+
+    } catch (error) {
+        console.error(`Error fetching data for category ${categoryName}:`, error);
+        updateStatusUI(false, `Failed to load data for ${categoryName}. ${error.message}`);
+        currentCategoryData = []; // Clear data on error
+        renderProphecyList([]); // Render empty list on error
+    }
+}
+
+
+// --- UI Processing and Rendering ---
+/**
+ * Populates the category navigation UI from the manifest data.
  */
 function processCategories() {
-    const categorySet = new Set();
-    allLoadedProphecies.forEach(pair => {
-        if (pair.category) {
-            categorySet.add(pair.category.trim());
-        } else {
-            console.warn("Warning: Prophecy pair missing 'category' field:", pair);
-            categorySet.add("Uncategorized"); // Add a default category
-        }
+    if (!categoryNavContainer) {
+        console.error("Category navigation container not found.");
+        return;
+    }
+    // Example: Using a UL for categories
+    const categoryList = document.createElement('ul');
+    categoryList.id = 'category-list'; // Ensure ID matches CSS if needed
+
+    availableCategories.forEach(category => {
+        const listItem = document.createElement('li');
+        listItem.textContent = category.name;
+        listItem.dataset.categoryName = category.name; // Store name
+        listItem.dataset.filePath = category.file || ''; // Store file path (or empty string for null)
+        listItem.addEventListener('click', handleCategorySelection);
+        categoryList.appendChild(listItem);
     });
-    // Sort categories alphabetically, add "All" option
-    categories = ["All Categories", ...Array.from(categorySet).sort()];
 
-    // Populate the category filter dropdown (assuming it exists)
-    if (categoryFilterElement) {
-        categoryFilterElement.innerHTML = ''; // Clear existing options
-        categories.forEach(category => {
-            const option = document.createElement('option');
-            option.value = category;
-            option.textContent = category;
-            categoryFilterElement.appendChild(option);
-        });
-        // Add event listener to the filter
-        categoryFilterElement.addEventListener('change', handleCategoryFilterChange);
-    } else {
-         console.warn("Category filter element with ID 'category-filter' not found. Filtering UI disabled.");
-    }
+    categoryNavContainer.innerHTML = ''; // Clear placeholder
+    categoryNavContainer.appendChild(categoryList);
+    updateCategorySelectionVisuals(); // Set initial visual state
 }
 
-// --- UI Initialization and Rendering ---
-/**
- * Initializes the UI components after data has been successfully fetched.
- * Renders the initial list and displays the first item.
- */
-function initializeUI() {
-    if (filteredProphecies.length > 0) {
-        currentSelectionIndex = 0; // Select first item in the (initially unfiltered) list
-        renderProphecyList(filteredProphecies); // Render the full list initially
-        displayDetailedPair(filteredProphecies[currentSelectionIndex]); // Display the first item
-        updateListSelection(); // Highlight first item in the list
-    } else {
-         // Handle case where data might be valid but empty after filtering (though unlikely initially)
-         prophecyListElement.innerHTML = '<li>No prophecies found matching the criteria.</li>';
-         // Clear detail view or show message
-         displayDetailedPair(null); // Display error/empty state
-    }
-}
 
 /**
- * Populates/Repopulates the prophecy list in the HTML based on filtered data.
- * @param {Array} data - The array of prophecy objects to display in the list.
+ * Populates/Repopulates the prophecy list based on currently loaded category data.
+ * @param {Array} data - The array of prophecy objects for the current category.
  */
 function renderProphecyList(data) {
     prophecyListElement.innerHTML = ''; // Clear previous list
 
     if (!data || data.length === 0) {
-        prophecyListElement.innerHTML = '<li>No prophecies match the selected category.</li>';
-         displayDetailedPair(null); // Clear details if list is empty
+        prophecyListElement.innerHTML = `<li>No prophecies found for ${currentCategoryFilter}.</li>`;
+        displayDetailedPair(null, `No prophecies found for ${currentCategoryFilter}.`); // Also clear detail
         return;
     }
 
     data.forEach((pair, index) => {
         const listItem = document.createElement('li');
-        listItem.textContent = pair.ot_ref || `Prophecy ${index + 1}`; // Use OT ref for label
-        // IMPORTANT: Store the index *within the currently filtered list*
-        listItem.dataset.index = index;
+        listItem.textContent = pair.ot_ref || `Prophecy ${index + 1}`;
+        listItem.dataset.index = index; // Index within the *current category data*
         listItem.addEventListener('click', handleListSelection);
         prophecyListElement.appendChild(listItem);
     });
 
-     // After re-rendering the list, ensure the selection is valid and updated
-     if(currentSelectionIndex >= data.length) {
-         currentSelectionIndex = 0; // Reset selection if previous selection is out of bounds
-     }
-     if(data.length > 0) {
-         displayDetailedPair(data[currentSelectionIndex]);
-         updateListSelection();
-     } else {
-         displayDetailedPair(null); // No items to display details for
-     }
-
+    // After rendering, display the first item of the newly loaded category
+    if (data.length > 0) {
+        currentSelectionIndex = 0;
+        displayDetailedPair(data[currentSelectionIndex]);
+        updateListSelectionVisuals();
+    }
 }
 
 /**
  * Displays the selected prophecy/fulfillment pair in the detail view.
- * @param {object | null} pairObject - The object containing the prophecy data, or null to clear.
+ * @param {object | null} pairObject - The object containing the prophecy data, or null.
+ * @param {string} defaultText - Text to display if pairObject is null.
  */
-function displayDetailedPair(pairObject) {
+function displayDetailedPair(pairObject, defaultText = 'Select a prophecy.') {
     if (pairObject) {
         otRefElement.textContent = pairObject.ot_ref || 'N/A';
         otTextElement.textContent = pairObject.ot_prophecy || 'N/A';
         ntRefElement.textContent = pairObject.nt_ref || 'N/A';
         ntTextElement.textContent = pairObject.nt_fulfillment || 'N/A';
-        categoryElement.textContent = pairObject.category || 'Uncategorized'; // Display category
-        prophecyContentElement.style.display = 'block'; // Ensure content is visible
+        // Use currentCategoryFilter since 'category' field in object is now optional
+        categoryElement.textContent = currentCategoryFilter || 'N/A';
+        prophecyContentElement.style.display = 'block';
     } else {
-        // Clear the detail view if no object is provided (e.g., empty filter)
+        // Clear the detail view or show prompt
         otRefElement.textContent = '';
-        otTextElement.textContent = 'Select a prophecy from the list.';
+        otTextElement.textContent = defaultText;
         ntRefElement.textContent = '';
         ntTextElement.textContent = '';
         categoryElement.textContent = '';
-        // Keep the content area visible to show the 'Select...' message
-         prophecyContentElement.style.display = 'block';
+        prophecyContentElement.style.display = 'block'; // Keep area visible for prompt
     }
 }
 
 // --- Event Handling ---
 /**
- * Handles changes in the category filter dropdown.
+ * Handles clicks on items in the category navigation UI.
  */
-function handleCategoryFilterChange(event) {
-    const selectedCategory = event.target.value;
+function handleCategorySelection(event) {
+    const selectedCategoryName = event.target.dataset.categoryName;
+    const selectedFilePath = event.target.dataset.filePath === '' ? null : event.target.dataset.filePath;
 
-    if (selectedCategory === "All Categories") {
-        filteredProphecies = [...allLoadedProphecies];
+    if (selectedCategoryName !== undefined) {
+        // Fetch data for the selected category
+        fetchCategoryData(selectedCategoryName, selectedFilePath);
     } else {
-        filteredProphecies = allLoadedProphecies.filter(pair => (pair.category || "Uncategorized") === selectedCategory);
+        console.error("Category selection failed: data attributes not found.");
     }
-
-    // Reset selection and re-render the list with the filtered data
-    currentSelectionIndex = 0;
-    renderProphecyList(filteredProphecies);
 }
-
 
 /**
  * Handles clicks on items in the prophecy list.
- * @param {Event} event - The click event object.
  */
 function handleListSelection(event) {
-    // Get the index *relative to the currently displayed filtered list*
     const selectedIndex = parseInt(event.target.dataset.index);
 
-    if (!isNaN(selectedIndex) && selectedIndex >= 0 && selectedIndex < filteredProphecies.length) {
+    if (!isNaN(selectedIndex) && selectedIndex >= 0 && selectedIndex < currentCategoryData.length) {
         currentSelectionIndex = selectedIndex;
-        // Display the pair from the *filtered* list
-        displayDetailedPair(filteredProphecies[currentSelectionIndex]);
-        updateListSelection(); // Update visual selection in the list
+        displayDetailedPair(currentCategoryData[currentSelectionIndex]);
+        updateListSelectionVisuals();
     } else {
-        console.error("Invalid index clicked:", event.target.dataset.index);
+        console.error("Invalid index clicked in prophecy list:", event.target.dataset.index);
     }
 }
 
+// --- Visual Update Helpers ---
 /**
- * Updates the visual styling of the list to show the currently selected item.
+ * Updates the visual styling of the category list.
  */
-function updateListSelection() {
+function updateCategorySelectionVisuals() {
+     if (!categoryNavContainer) return;
+     const categoryItems = categoryNavContainer.querySelectorAll('li'); // Assuming UL structure
+     categoryItems.forEach(item => {
+         if (item.dataset.categoryName === currentCategoryFilter) {
+             item.classList.add('selected');
+         } else {
+             item.classList.remove('selected');
+         }
+     });
+}
+
+/**
+ * Updates the visual styling of the prophecy list.
+ */
+function updateListSelectionVisuals() {
     const listItems = prophecyListElement.querySelectorAll('li');
     listItems.forEach((item, index) => {
-        // Compare item's index (which matches filteredProphecies index) to currentSelectionIndex
-        if (index === currentSelectionIndex) {
+        // Check if the item's stored index matches the current selection index
+        if (item.dataset.index && parseInt(item.dataset.index) === currentSelectionIndex) {
             item.classList.add('selected');
         } else {
             item.classList.remove('selected');
@@ -251,5 +274,5 @@ function updateListSelection() {
 
 
 // --- Initial Execution ---
-// Start the process by fetching the data when the script loads.
-document.addEventListener('DOMContentLoaded', fetchProphecyData);
+// Start the process by fetching the category manifest when the DOM is ready.
+document.addEventListener('DOMContentLoaded', fetchManifest);

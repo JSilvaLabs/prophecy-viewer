@@ -3,23 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prophecy Viewer MVP</title> <link rel="stylesheet" href="style.css">
+    <title>Prophecy Viewer MVP V2</title>
+    <link rel="stylesheet" href="style.css">
     </head>
 <body>
 
     <header>
-        <h1>Prophecy Viewer MVP</h1> </header>
+        <h1>Prophecy Viewer MVP V2</h1>
+    </header>
 
     <div id="app-container">
 
         <nav id="prophecy-list-container">
-            <h2>Prophecies / Categories</h2> <ul id="prophecy-list">
-                </ul>
+            <h2>Categories</h2>
+            <div id="category-nav-container">
+                <p>Loading categories...</p> </div>
+
+            <h2 style="margin-top: 20px;">Prophecies</h2>
+            <ul id="prophecy-list">
+                <li>Select a category first.</li> </ul>
         </nav>
 
         <main id="detail-view">
             <div id="loading-indicator" class="status-message loading">
-                Loading prophecy data...
+                Loading category manifest...
             </div>
 
             <div id="error-message" class="status-message error" style="display: none;">
@@ -40,7 +47,7 @@
         </main>
 
     </div> <footer>
-        <p>MVP Version - Data from prophecies.json</p> </footer>
+        <p>MVP Version 2 - Multi-File Architecture</p> </footer>
 
     <script src="script.js" defer></script>
 

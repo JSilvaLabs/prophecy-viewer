@@ -39,59 +39,94 @@ header {
     overflow: hidden; /* Important for border-radius */
 }
 
-/* Prophecy List/Category Styling */
-#prophecy-list-container {
+/* Sidebar Styling (Holds Categories & Prophecy List) */
+#prophecy-list-container { /* Using this ID for the whole sidebar */
     width: 35%; /* Adjust width as needed */
     min-width: 250px; /* Minimum width */
     max-width: 400px; /* Max width for list */
     padding: 20px;
     border-right: 1px solid #dee2e6; /* Lighter border */
     background-color: #fff;
-    overflow-y: auto; /* Allow scrolling if list is long */
+    display: flex; /* Use flex to manage internal sections */
+    flex-direction: column;
+    overflow-y: auto; /* Allow scrolling for the whole sidebar if needed */
 }
 
-#prophecy-list-container h2 {
+/* Category Navigation Area */
+#category-nav-container {
+    margin-bottom: 20px; /* Space below categories */
+    border-bottom: 2px solid #adb5bd; /* Stronger separator */
+    padding-bottom: 15px;
+}
+
+#category-nav-container h2,
+#prophecy-list-container h2 { /* Target both H2s in sidebar */
     margin-top: 0;
-    border-bottom: 1px solid #dee2e6;
-    padding-bottom: 10px;
-    font-size: 1.25em;
+    margin-bottom: 10px;
+    font-size: 1.2em;
     color: #495057;
 }
 
-/* Style for category filter elements if added later */
-.category-filter {
-    margin-bottom: 15px;
+/* Style for category list (if using UL) */
+#category-list {
+    list-style: none;
+    max-height: 25vh; /* Limit height for category list */
+    overflow-y: auto; /* Allow scrolling if many categories */
 }
 
+#category-list li {
+    padding: 8px 5px;
+    border-bottom: 1px solid #e9ecef;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    font-size: 0.9em;
+}
+
+#category-list li:hover {
+    background-color: #e9ecef;
+}
+
+#category-list li.selected {
+    background-color: #6c757d; /* Grey background for selected category */
+    color: #fff;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* Prophecy List Area */
 #prophecy-list {
     list-style: none;
+    flex-grow: 1; /* Allow prophecy list to take remaining space */
+    overflow-y: auto; /* Scroll long prophecy list */
+    min-height: 100px; /* Ensure some minimum height */
 }
 
 #prophecy-list li {
-    padding: 12px 8px; /* More padding */
-    border-bottom: 1px solid #e9ecef; /* Lighter separator */
+    padding: 10px 8px;
+    border-bottom: 1px solid #e9ecef;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     font-size: 0.95em;
 }
 
 #prophecy-list li:hover {
-    background-color: #e9ecef; /* Subtle hover */
+    background-color: #e9ecef;
 }
 
 #prophecy-list li.selected {
-    background-color: #0d6efd; /* Bootstrap primary blue */
+    background-color: #0d6efd; /* Blue for selected prophecy */
     color: #fff;
     font-weight: bold;
     border-radius: 4px;
 }
 
+
 /* Detail View Styling */
 #detail-view {
     width: 65%; /* Remaining width */
-    padding: 30px; /* More padding */
+    padding: 30px;
     overflow-y: auto;
-    position: relative; /* Needed for absolute positioning of status messages */
+    position: relative;
 }
 
 /* Status Message Styling (Loading/Error) */
@@ -100,25 +135,21 @@ header {
     padding: 40px 20px;
     font-size: 1.1em;
     border-radius: 5px;
-    margin: 20px 0; /* Add some margin */
+    margin: 20px 0;
 }
 
 #loading-indicator {
-    color: #6c757d; /* Grey text */
+    color: #6c757d;
     background-color: #e9ecef;
     border: 1px solid #dee2e6;
 }
 
 #error-message {
-    color: #dc3545; /* Red text */
-    background-color: #f8d7da; /* Light red background */
-    border: 1px solid #f5c6cb; /* Red border */
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
     font-weight: bold;
 }
-
-/* Hide/Show Logic (JS will toggle display style) */
-/* Default display is handled in HTML or initial JS state */
-
 
 /* Prophecy/Fulfillment Display Sections */
 .prophecy-display, .fulfillment-display {
@@ -126,7 +157,7 @@ header {
 }
 
 .prophecy-display h3, .fulfillment-display h3 {
-    color: #212529; /* Darker heading */
+    color: #212529;
     margin-bottom: 10px;
     font-size: 1.2em;
     border-bottom: 1px solid #eee;
@@ -135,21 +166,21 @@ header {
 .prophecy-display h3 span, .fulfillment-display h3 span {
     font-weight: normal;
     font-style: italic;
-    color: #6c757d; /* Grey */
+    color: #6c757d;
     font-size: 0.9em;
     margin-left: 5px;
 }
 
 .prophecy-display p, .fulfillment-display p {
-    background-color: #f8f9fa; /* Light background for text */
+    background-color: #f8f9fa;
     border: 1px solid #dee2e6;
     padding: 15px;
     border-radius: 4px;
-    font-size: 1.05em; /* Slightly larger text */
+    font-size: 1.05em;
     line-height: 1.7;
 }
 
-/* Category display styling */
+/* Category display styling in detail view */
 #prophecy-category {
     font-style: italic;
     color: #495057;
@@ -169,7 +200,7 @@ footer {
 }
 
 /* Responsiveness */
-@media (max-width: 992px) { /* Adjust breakpoint if needed */
+@media (max-width: 992px) {
     #app-container {
         flex-direction: column;
         margin: 10px auto;
@@ -184,11 +215,23 @@ footer {
     }
 
     #prophecy-list-container {
-         max-height: 40vh; /* Adjust max height for list on smaller screens */
+        max-height: none; /* Remove max height for sidebar on mobile */
+        overflow-y: visible; /* Prevent double scrollbars */
     }
+    #category-list {
+         max-height: 20vh; /* Re-apply max-height specifically to category list */
+         overflow-y: auto;
+    }
+     #prophecy-list {
+         max-height: 30vh; /* Apply max-height specifically to prophecy list */
+         overflow-y: auto;
+         flex-grow: 0; /* Don't let it grow infinitely */
+     }
+
 
     #detail-view {
         border-bottom: none;
-        padding: 20px; /* Adjust padding */
+        padding: 20px;
+        flex-grow: 1; /* Allow detail view to take remaining space */
     }
 }
