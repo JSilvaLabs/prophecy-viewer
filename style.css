@@ -12,8 +12,8 @@ body {
     background-color: #f8f9fa; /* Slightly lighter background */
     color: #343a40; /* Darker text */
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    flex-direction: column; /* Stack header, container, footer vertically */
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
 }
 
 /* Header Styling */
@@ -31,23 +31,23 @@ header {
     display: flex;
     flex: 1; /* Grow to fill space */
     width: 100%;
-    max-width: 1400px; /* Wider max width */
-    margin: 20px auto;
+    max-width: 1400px; /* Max width for larger screens */
+    margin: 20px auto; /* Center container */
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden; /* Important for border-radius */
 }
 
-/* Prophecy List Styling */
+/* Prophecy List/Category Styling */
 #prophecy-list-container {
-    width: 35%; /* Slightly wider list */
-    min-width: 250px;
+    width: 35%; /* Adjust width as needed */
+    min-width: 250px; /* Minimum width */
     max-width: 400px; /* Max width for list */
     padding: 20px;
     border-right: 1px solid #dee2e6; /* Lighter border */
     background-color: #fff;
-    overflow-y: auto; /* Scroll long list */
+    overflow-y: auto; /* Allow scrolling if list is long */
 }
 
 #prophecy-list-container h2 {
@@ -56,6 +56,11 @@ header {
     padding-bottom: 10px;
     font-size: 1.25em;
     color: #495057;
+}
+
+/* Style for category filter elements if added later */
+.category-filter {
+    margin-bottom: 15px;
 }
 
 #prophecy-list {
@@ -112,9 +117,7 @@ header {
 }
 
 /* Hide/Show Logic (JS will toggle display style) */
-/* #loading-indicator { display: block; } Default is block via class potentially */
-/* #error-message { display: none; } */
-/* #prophecy-content { display: none; } */
+/* Default display is handled in HTML or initial JS state */
 
 
 /* Prophecy/Fulfillment Display Sections */
@@ -144,6 +147,12 @@ header {
     border-radius: 4px;
     font-size: 1.05em; /* Slightly larger text */
     line-height: 1.7;
+}
+
+/* Category display styling */
+#prophecy-category {
+    font-style: italic;
+    color: #495057;
 }
 
 
