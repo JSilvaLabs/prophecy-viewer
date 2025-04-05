@@ -1,6 +1,6 @@
 /**
- * Prophecy Viewer Prototype - Script
- * Handles fetching data, populating list, and displaying selected prophecy pair.
+ * Prophecy Viewer Prototype V2 - Script
+ * Focuses on robust data fetching, error handling, and state-based UI updates.
  */
 
 // --- DOM Element References ---
@@ -10,79 +10,110 @@ const otTextElement = document.getElementById('ot-prophecy-text');
 const ntRefElement = document.getElementById('nt-ref');
 const ntTextElement = document.getElementById('nt-fulfillment-text');
 const loadingIndicator = document.getElementById('loading-indicator');
+const errorMessageElement = document.getElementById('error-message');
 const prophecyContentElement = document.getElementById('prophecy-content');
 
 // --- Global Variables ---
-let loadedProphecies = []; // To store the fetched data
-let currentSelectionIndex = 0; // To track the selected list item
+let loadedProphecies = []; // Stores the fetched data
+let currentSelectionIndex = 0; // Tracks the selected list item
+
+// --- State Management Helper ---
+/**
+ * Updates the visibility of UI elements based on the current state.
+ * @param {boolean} isLoading - Is the application currently loading data?
+ * @param {string|null} error - An error message string, or null if no error.
+ */
+function updateUIState(isLoading, error = null) {
+    if (isLoading) {
+        loadingIndicator.style.display = 'block';
+        errorMessageElement.style.display = 'none';
+        prophecyContentElement.style.display = 'none';
+    } else if (error) {
+        loadingIndicator.style.display = 'none';
+        errorMessageElement.textContent = error; // Display the error message
+        errorMessageElement.style.display = 'block';
+        prophecyContentElement.style.display = 'none';
+    } else { // Data loaded successfully
+        loadingIndicator.style.display = 'none';
+        errorMessageElement.style.display = 'none';
+        prophecyContentElement.style.display = 'block';
+    }
+}
 
 // --- Data Fetching Function ---
 /**
- * Fetches prophecy data from the prophecies.json file.
+ * Fetches prophecy data from the prophecies.json file asynchronously.
+ * Handles network and parsing errors, updating the UI accordingly.
  */
 async function fetchProphecyData() {
-    // Show loading indicator initially
-    loadingIndicator.style.display = 'block';
-    prophecyContentElement.style.display = 'none';
+    updateUIState(true); // Show loading indicator
 
     try {
         const response = await fetch('prophecies.json');
-        // Check if the network response is ok
+        // Check if the network response is ok (status 200-299)
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            // Throw an error with the status text (e.g., "Not Found", "Forbidden")
+            throw new Error(`HTTP error! Status: ${response.status} ${response.statusText}`);
         }
-        // Parse the JSON data
-        loadedProphecies = await response.json();
+        // Try to parse the JSON data
+        const data = await response.json();
 
-        // Check if data was loaded successfully and is an array
-        if (!Array.isArray(loadedProphecies) || loadedProphecies.length === 0) {
-            throw new Error('No prophecy data found or data is not in expected format.');
+        // Basic validation: Check if it's an array and not empty
+        if (!Array.isArray(data) || data.length === 0) {
+            throw new Error('Invalid or empty data format received from prophecies.json.');
         }
 
-        // Data loaded successfully, initialize the UI
-        initializeUI();
+        // SUCCESS! Store data and initialize the rest of the UI
+        loadedProphecies = data;
+        initializeUI(); // Call function to build list and display first item
+        updateUIState(false); // Hide loading, show content
 
     } catch (error) {
-        // Log the error and display a message to the user
-        console.error('Error fetching or parsing prophecy data:', error);
-        loadingIndicator.textContent = `Error loading data: ${error.message}. Please check prophecies.json.`;
-        loadingIndicator.style.color = 'red'; // Make error more visible
-    } finally {
-        // We hide the loading indicator only if data loads successfully (in initializeUI)
-        // or display an error message within it if fetch fails.
+        // FAILURE! Log the error and display a user-friendly message
+        console.error('Error fetching or processing prophecy data:', error);
+        // Display the error message in the designated HTML element
+        updateUIState(false, `Failed to load prophecy data. ${error.message}. Please ensure 'prophecies.json' exists, is accessible, and contains valid JSON.`);
     }
 }
 
 // --- UI Initialization and Rendering ---
 /**
- * Initializes the UI after data has been fetched.
+ * Initializes the UI components after data has been successfully fetched.
+ * Focus: Get the first item displayed reliably. List rendering is incremental.
  */
 function initializeUI() {
-    renderProphecyList(loadedProphecies);
-    // Display the first prophecy by default
-    displayDetailedPair(loadedProphecies[currentSelectionIndex]);
-    // Mark the first item as selected in the list
-    updateListSelection();
-    // Hide loading indicator and show content
-    loadingIndicator.style.display = 'none';
-    prophecyContentElement.style.display = 'block';
+    // V2 Focus: Ensure the first item displays correctly first.
+    if (loadedProphecies.length > 0) {
+        currentSelectionIndex = 0; // Reset to first item
+        displayDetailedPair(loadedProphecies[currentSelectionIndex]);
+        // Incremental Step: Render the list after confirming basic display works.
+        renderProphecyList(loadedProphecies);
+        // Update list visuals after rendering
+        updateListSelection();
+    } else {
+         // This case should ideally be caught by validation in fetch, but as a fallback:
+         updateUIState(false, "No prophecy data available to display.");
+    }
 }
 
 /**
- * Populates the prophecy list in the HTML.
+ * Populates the prophecy list in the HTML. (Incremental Feature)
  * @param {Array} data - The array of prophecy objects.
  */
 function renderProphecyList(data) {
-    // Clear any existing list items (like "Loading list...")
+    // Clear any previous items
     prophecyListElement.innerHTML = '';
+
+    if (!data || data.length === 0) {
+        prophecyListElement.innerHTML = '<li>No prophecies loaded.</li>';
+        return;
+    }
 
     data.forEach((pair, index) => {
         const listItem = document.createElement('li');
-        // Display the OT reference as the list item text
-        listItem.textContent = pair.ot_ref || `Prophecy ${index + 1}`; // Fallback text
-        // Store the index on the element using a data attribute
-        listItem.dataset.index = index;
-        // Add event listener for selection
+        // Use OT reference for list text, provide fallback
+        listItem.textContent = pair.ot_ref || `Prophecy ${index + 1}`;
+        listItem.dataset.index = index; // Store index for click handling
         listItem.addEventListener('click', handleListSelection);
         prophecyListElement.appendChild(listItem);
     });
@@ -90,7 +121,7 @@ function renderProphecyList(data) {
 
 /**
  * Displays the selected prophecy/fulfillment pair in the detail view.
- * @param {object} pairObject - The object containing ot_ref, ot_prophecy, etc.
+ * @param {object} pairObject - The object containing the prophecy data.
  */
 function displayDetailedPair(pairObject) {
     if (pairObject) {
@@ -99,10 +130,10 @@ function displayDetailedPair(pairObject) {
         ntRefElement.textContent = pairObject.nt_ref || 'N/A';
         ntTextElement.textContent = pairObject.nt_fulfillment || 'N/A';
     } else {
-        // Handle case where the object is invalid
-        console.error("Invalid pair object provided to displayDetailedPair");
+        console.error("Attempted to display an invalid pair object.");
+        // Optionally update UI to show an internal error specific to display
         otRefElement.textContent = 'Error';
-        otTextElement.textContent = 'Could not load data for this item.';
+        otTextElement.textContent = 'Could not display selected item data.';
         ntRefElement.textContent = 'Error';
         ntTextElement.textContent = '';
     }
@@ -110,28 +141,23 @@ function displayDetailedPair(pairObject) {
 
 // --- Event Handling ---
 /**
- * Handles clicks on items in the prophecy list.
+ * Handles clicks on items in the prophecy list. (Incremental Feature)
  * @param {Event} event - The click event object.
  */
 function handleListSelection(event) {
-    // Get the index stored in the data attribute
     const selectedIndex = parseInt(event.target.dataset.index);
 
-    // Check if the index is valid
     if (!isNaN(selectedIndex) && selectedIndex >= 0 && selectedIndex < loadedProphecies.length) {
-        // Update the current selection index
         currentSelectionIndex = selectedIndex;
-        // Display the corresponding pair
         displayDetailedPair(loadedProphecies[currentSelectionIndex]);
-        // Update the visual selection in the list
-        updateListSelection();
+        updateListSelection(); // Update visual selection
     } else {
-        console.error("Invalid index selected from list:", event.target.dataset.index);
+        console.error("Invalid index clicked:", event.target.dataset.index);
     }
 }
 
 /**
- * Updates the visual styling of the list to show the currently selected item.
+ * Updates the visual styling of the list to show the currently selected item. (Incremental Feature)
  */
 function updateListSelection() {
     const listItems = prophecyListElement.querySelectorAll('li');
@@ -144,7 +170,6 @@ function updateListSelection() {
     });
 }
 
-
 // --- Initial Execution ---
-// Start the process by fetching the data when the script loads
+// Start the process by fetching the data when the script loads.
 fetchProphecyData();

@@ -9,114 +9,141 @@
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
-    display: flex; /* Use flexbox for overall layout */
-    flex-direction: column; /* Stack header, container, footer vertically */
-    min-height: 100vh; /* Ensure body takes at least full viewport height */
+    background-color: #f8f9fa; /* Slightly lighter background */
+    color: #343a40; /* Darker text */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Header Styling */
 header {
-    background-color: #333;
+    background-color: #495057; /* Dark grey */
     color: #fff;
     padding: 1rem 0;
     text-align: center;
     width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Main App Container - Flexbox for List/Detail Layout */
+/* Main App Container - Flexbox Layout */
 #app-container {
     display: flex;
-    flex: 1; /* Allow container to grow and fill available space */
+    flex: 1; /* Grow to fill space */
     width: 100%;
-    max-width: 1200px; /* Max width for larger screens */
-    margin: 20px auto; /* Center container */
+    max-width: 1400px; /* Wider max width */
+    margin: 20px auto;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    overflow: hidden; /* Contain children */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden; /* Important for border-radius */
 }
 
 /* Prophecy List Styling */
 #prophecy-list-container {
-    width: 30%; /* Adjust width as needed */
-    min-width: 200px; /* Minimum width */
+    width: 35%; /* Slightly wider list */
+    min-width: 250px;
+    max-width: 400px; /* Max width for list */
     padding: 20px;
-    border-right: 1px solid #eee;
-    background-color: #fdfdfd;
-    overflow-y: auto; /* Allow scrolling if list is long */
+    border-right: 1px solid #dee2e6; /* Lighter border */
+    background-color: #fff;
+    overflow-y: auto; /* Scroll long list */
 }
 
 #prophecy-list-container h2 {
     margin-top: 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #dee2e6;
     padding-bottom: 10px;
-    font-size: 1.2em;
+    font-size: 1.25em;
+    color: #495057;
 }
 
 #prophecy-list {
-    list-style: none; /* Remove default bullet points */
+    list-style: none;
 }
 
 #prophecy-list li {
-    padding: 10px 5px;
-    border-bottom: 1px solid #eee;
+    padding: 12px 8px; /* More padding */
+    border-bottom: 1px solid #e9ecef; /* Lighter separator */
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    font-size: 0.95em;
 }
 
 #prophecy-list li:hover {
-    background-color: #e9e9e9;
+    background-color: #e9ecef; /* Subtle hover */
 }
 
 #prophecy-list li.selected {
-    background-color: #d4edda; /* Light green background for selected item */
+    background-color: #0d6efd; /* Bootstrap primary blue */
+    color: #fff;
     font-weight: bold;
+    border-radius: 4px;
 }
 
 /* Detail View Styling */
 #detail-view {
-    width: 70%; /* Adjust width as needed */
-    padding: 20px;
-    overflow-y: auto; /* Allow scrolling for long text */
+    width: 65%; /* Remaining width */
+    padding: 30px; /* More padding */
+    overflow-y: auto;
+    position: relative; /* Needed for absolute positioning of status messages */
 }
 
-/* Loading Indicator Styling */
-#loading-indicator {
+/* Status Message Styling (Loading/Error) */
+.status-message {
     text-align: center;
-    padding: 30px;
-    font-style: italic;
-    color: #777;
+    padding: 40px 20px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    margin: 20px 0; /* Add some margin */
 }
-/* Initially show loading, hide content */
-#loading-indicator.loaded { display: none; }
-#prophecy-content { display: none; } /* Initially hidden */
-#prophecy-content.loaded { display: block; } /* Show when loaded class is added */
+
+#loading-indicator {
+    color: #6c757d; /* Grey text */
+    background-color: #e9ecef;
+    border: 1px solid #dee2e6;
+}
+
+#error-message {
+    color: #dc3545; /* Red text */
+    background-color: #f8d7da; /* Light red background */
+    border: 1px solid #f5c6cb; /* Red border */
+    font-weight: bold;
+}
+
+/* Hide/Show Logic (JS will toggle display style) */
+/* #loading-indicator { display: block; } Default is block via class potentially */
+/* #error-message { display: none; } */
+/* #prophecy-content { display: none; } */
 
 
 /* Prophecy/Fulfillment Display Sections */
 .prophecy-display, .fulfillment-display {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .prophecy-display h3, .fulfillment-display h3 {
-    color: #444;
-    margin-bottom: 8px;
-    font-size: 1.1em;
+    color: #212529; /* Darker heading */
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
 }
 .prophecy-display h3 span, .fulfillment-display h3 span {
     font-weight: normal;
     font-style: italic;
-    color: #666;
+    color: #6c757d; /* Grey */
     font-size: 0.9em;
+    margin-left: 5px;
 }
 
 .prophecy-display p, .fulfillment-display p {
-    background-color: #f9f9f9;
-    border: 1px solid #e3e3e3;
+    background-color: #f8f9fa; /* Light background for text */
+    border: 1px solid #dee2e6;
     padding: 15px;
     border-radius: 4px;
+    font-size: 1.05em; /* Slightly larger text */
+    line-height: 1.7;
 }
 
 
@@ -124,30 +151,35 @@ header {
 footer {
     text-align: center;
     margin-top: auto; /* Push footer to bottom */
-    padding: 15px 0;
-    border-top: 1px solid #eee;
+    padding: 20px 0;
+    border-top: 1px solid #dee2e6;
     font-size: 0.9em;
-    color: #777;
-    background-color: #fff; /* Match header/container background */
+    color: #6c757d;
+    background-color: #fff;
     width: 100%;
 }
 
-/* Basic Responsiveness */
-@media (max-width: 768px) {
+/* Responsiveness */
+@media (max-width: 992px) { /* Adjust breakpoint if needed */
     #app-container {
-        flex-direction: column; /* Stack list and detail vertically on smaller screens */
+        flex-direction: column;
         margin: 10px auto;
         max-width: 95%;
     }
 
     #prophecy-list-container, #detail-view {
-        width: 100%; /* Take full width when stacked */
+        width: 100%;
+        max-width: 100%;
         border-right: none;
-        border-bottom: 1px solid #eee; /* Add border between sections */
-        max-height: 30vh; /* Limit height of list on mobile */
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    #prophecy-list-container {
+         max-height: 40vh; /* Adjust max height for list on smaller screens */
     }
 
     #detail-view {
         border-bottom: none;
+        padding: 20px; /* Adjust padding */
     }
 }

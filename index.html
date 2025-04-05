@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prophecy Viewer Prototype</title>
+    <title>Prophecy Viewer Prototype V2</title>
     <link rel="stylesheet" href="style.css">
     </head>
 <body>
 
     <header>
-        <h1>Prophecy Viewer Prototype</h1>
+        <h1>Prophecy Viewer Prototype V2</h1>
     </header>
 
     <div id="app-container">
@@ -17,14 +17,16 @@
         <nav id="prophecy-list-container">
             <h2>Prophecies</h2>
             <ul id="prophecy-list">
-                <li>Loading list...</li>
-            </ul>
+                </ul>
         </nav>
 
         <main id="detail-view">
-            <div id="loading-indicator" class="loading">
+            <div id="loading-indicator" class="status-message loading">
                 Loading prophecy data...
             </div>
+
+            <div id="error-message" class="status-message error" style="display: none;">
+                </div>
 
             <div id="prophecy-content" style="display: none;">
                 <section class="prophecy-display">
@@ -40,7 +42,7 @@
         </main>
 
     </div> <footer>
-        <p>Prototype Version - Data from prophecies.json</p>
+        <p>Prototype Version 2 - Data from prophecies.json</p>
     </footer>
 
     <script src="script.js" defer></script>
