@@ -1,84 +1,150 @@
 /**
- * Prophecy Viewer POC - Script
- * Handles displaying OT prophecy/NT fulfillment pairs.
+ * Prophecy Viewer Prototype - Script
+ * Handles fetching data, populating list, and displaying selected prophecy pair.
  */
 
-// --- 1. Data Array ---
-// IMPORTANT: Replace the example data below with the actual
-// prophecy/fulfillment pairs you compile from the BSB.
-// Each object needs an 'ot_prophecy' and 'nt_fulfillment' property.
-const prophecyPairs = [
-    {
-        ot_prophecy: "Example OT: The virgin will conceive and give birth to a son, and will call him Immanuel. (Isaiah 7:14 - Placeholder)",
-        nt_fulfillment: "Example NT: \"The virgin will conceive and give birth to a son, and they will call him Immanuel\" (which means \"God with us\"). (Matthew 1:23 - Placeholder)"
-    },
-    {
-        ot_prophecy: "Example OT: But you, Bethlehem Ephrathah, though you are small among the clans of Judah, out of you will come for me one who will be ruler over Israel, whose origins are from of old, from ancient times. (Micah 5:2 - Placeholder)",
-        nt_fulfillment: "Example NT: After Jesus was born in Bethlehem in Judea, during the time of King Herod, Magi from the east came to Jerusalem... (Matthew 2:1 - Placeholder)"
-    },
-    {
-        ot_prophecy: "Example OT: Rejoice greatly, Daughter Zion! Shout, Daughter Jerusalem! See, your king comes to you, righteous and victorious, lowly and riding on a donkey, on a colt, the foal of a donkey. (Zechariah 9:9 - Placeholder)",
-        nt_fulfillment: "Example NT: They took palm branches and went out to meet him, shouting, \"Hosanna!\" \"Blessed is he who comes in the name of the Lord!\" \"Blessed is the king of Israel!\" Jesus found a young donkey and sat on it, as it is written... (John 12:13-14 - Placeholder)"
-    }
-    // --- ADD MORE PAIRS HERE ---
-];
-
-// --- 2. DOM Element References ---
-// Get references to the HTML elements where we will display text
+// --- DOM Element References ---
+const prophecyListElement = document.getElementById('prophecy-list');
+const otRefElement = document.getElementById('ot-ref');
 const otTextElement = document.getElementById('ot-prophecy-text');
+const ntRefElement = document.getElementById('nt-ref');
 const ntTextElement = document.getElementById('nt-fulfillment-text');
-const nextButton = document.getElementById('next-button');
+const loadingIndicator = document.getElementById('loading-indicator');
+const prophecyContentElement = document.getElementById('prophecy-content');
 
-// --- 3. State Variable ---
-// Variable to keep track of the currently displayed pair index
-let currentIndex = 0; // Start with the first pair
+// --- Global Variables ---
+let loadedProphecies = []; // To store the fetched data
+let currentSelectionIndex = 0; // To track the selected list item
 
-// --- 4. Display Function ---
+// --- Data Fetching Function ---
 /**
- * Updates the HTML to display the prophecy/fulfillment pair at the given index.
- * @param {number} index - The index of the pair to display in the prophecyPairs array.
+ * Fetches prophecy data from the prophecies.json file.
  */
-function displayPair(index) {
-    // Check if the data array and the specific index exist
-    if (prophecyPairs && prophecyPairs.length > 0 && prophecyPairs[index]) {
-        // Update the text content of the HTML elements
-        otTextElement.textContent = prophecyPairs[index].ot_prophecy;
-        ntTextElement.textContent = prophecyPairs[index].nt_fulfillment;
-    } else {
-        // Handle cases where data is missing or index is out of bounds
-        console.error("Error: Could not display pair at index", index);
-        otTextElement.textContent = 'Error: Prophecy data not found.';
-        ntTextElement.textContent = 'Error: Fulfillment data not found.';
+async function fetchProphecyData() {
+    // Show loading indicator initially
+    loadingIndicator.style.display = 'block';
+    prophecyContentElement.style.display = 'none';
+
+    try {
+        const response = await fetch('prophecies.json');
+        // Check if the network response is ok
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        // Parse the JSON data
+        loadedProphecies = await response.json();
+
+        // Check if data was loaded successfully and is an array
+        if (!Array.isArray(loadedProphecies) || loadedProphecies.length === 0) {
+            throw new Error('No prophecy data found or data is not in expected format.');
+        }
+
+        // Data loaded successfully, initialize the UI
+        initializeUI();
+
+    } catch (error) {
+        // Log the error and display a message to the user
+        console.error('Error fetching or parsing prophecy data:', error);
+        loadingIndicator.textContent = `Error loading data: ${error.message}. Please check prophecies.json.`;
+        loadingIndicator.style.color = 'red'; // Make error more visible
+    } finally {
+        // We hide the loading indicator only if data loads successfully (in initializeUI)
+        // or display an error message within it if fetch fails.
     }
 }
 
-// --- 5. Event Listener for Button ---
+// --- UI Initialization and Rendering ---
 /**
- * Handles clicks on the 'Next Pair' button.
- * Increments the index and displays the next pair, wrapping around to the start.
+ * Initializes the UI after data has been fetched.
  */
-function showNextPair() {
-    // Calculate the next index, wrapping around using the modulo operator
-    currentIndex = (currentIndex + 1) % prophecyPairs.length;
-    // Display the pair at the new index
-    displayPair(currentIndex);
+function initializeUI() {
+    renderProphecyList(loadedProphecies);
+    // Display the first prophecy by default
+    displayDetailedPair(loadedProphecies[currentSelectionIndex]);
+    // Mark the first item as selected in the list
+    updateListSelection();
+    // Hide loading indicator and show content
+    loadingIndicator.style.display = 'none';
+    prophecyContentElement.style.display = 'block';
 }
 
-// Add the event listener only if the button exists
-if (nextButton) {
-    nextButton.addEventListener('click', showNextPair);
-} else {
-    console.warn("Warning: 'Next Pair' button not found in the HTML.");
+/**
+ * Populates the prophecy list in the HTML.
+ * @param {Array} data - The array of prophecy objects.
+ */
+function renderProphecyList(data) {
+    // Clear any existing list items (like "Loading list...")
+    prophecyListElement.innerHTML = '';
+
+    data.forEach((pair, index) => {
+        const listItem = document.createElement('li');
+        // Display the OT reference as the list item text
+        listItem.textContent = pair.ot_ref || `Prophecy ${index + 1}`; // Fallback text
+        // Store the index on the element using a data attribute
+        listItem.dataset.index = index;
+        // Add event listener for selection
+        listItem.addEventListener('click', handleListSelection);
+        prophecyListElement.appendChild(listItem);
+    });
 }
 
-// --- 6. Initial Display Logic ---
-// Display the first prophecy pair when the script loads
-// We check if the array has pairs before attempting to display
-if (prophecyPairs.length > 0) {
-     displayPair(currentIndex); // Display the pair at the initial index (0)
-} else {
-     // Display a message if no data is available
-     console.error("Error: No prophecy pairs defined in the data array.");
-     otTextElement.textContent = 'No prophecy data available.';
-     ntTextElement.textContent = 'Please add data to script.js.';
+/**
+ * Displays the selected prophecy/fulfillment pair in the detail view.
+ * @param {object} pairObject - The object containing ot_ref, ot_prophecy, etc.
+ */
+function displayDetailedPair(pairObject) {
+    if (pairObject) {
+        otRefElement.textContent = pairObject.ot_ref || 'N/A';
+        otTextElement.textContent = pairObject.ot_prophecy || 'N/A';
+        ntRefElement.textContent = pairObject.nt_ref || 'N/A';
+        ntTextElement.textContent = pairObject.nt_fulfillment || 'N/A';
+    } else {
+        // Handle case where the object is invalid
+        console.error("Invalid pair object provided to displayDetailedPair");
+        otRefElement.textContent = 'Error';
+        otTextElement.textContent = 'Could not load data for this item.';
+        ntRefElement.textContent = 'Error';
+        ntTextElement.textContent = '';
+    }
 }
+
+// --- Event Handling ---
+/**
+ * Handles clicks on items in the prophecy list.
+ * @param {Event} event - The click event object.
+ */
+function handleListSelection(event) {
+    // Get the index stored in the data attribute
+    const selectedIndex = parseInt(event.target.dataset.index);
+
+    // Check if the index is valid
+    if (!isNaN(selectedIndex) && selectedIndex >= 0 && selectedIndex < loadedProphecies.length) {
+        // Update the current selection index
+        currentSelectionIndex = selectedIndex;
+        // Display the corresponding pair
+        displayDetailedPair(loadedProphecies[currentSelectionIndex]);
+        // Update the visual selection in the list
+        updateListSelection();
+    } else {
+        console.error("Invalid index selected from list:", event.target.dataset.index);
+    }
+}
+
+/**
+ * Updates the visual styling of the list to show the currently selected item.
+ */
+function updateListSelection() {
+    const listItems = prophecyListElement.querySelectorAll('li');
+    listItems.forEach((item, index) => {
+        if (index === currentSelectionIndex) {
+            item.classList.add('selected');
+        } else {
+            item.classList.remove('selected');
+        }
+    });
+}
+
+
+// --- Initial Execution ---
+// Start the process by fetching the data when the script loads
+fetchProphecyData();

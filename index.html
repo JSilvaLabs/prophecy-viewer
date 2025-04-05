@@ -3,37 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prophecy Viewer POC</title>
+    <title>Prophecy Viewer Prototype</title>
     <link rel="stylesheet" href="style.css">
-</head>
+    </head>
 <body>
 
     <header>
-        <h1>Prophecy Viewer POC</h1>
+        <h1>Prophecy Viewer Prototype</h1>
     </header>
 
-    <main id="viewer-container">
-        <section class="prophecy-section">
-            <h2>Old Testament Prophecy:</h2>
-            <div id="ot-prophecy-text" class="text-display">
-                Loading...
+    <div id="app-container">
+
+        <nav id="prophecy-list-container">
+            <h2>Prophecies</h2>
+            <ul id="prophecy-list">
+                <li>Loading list...</li>
+            </ul>
+        </nav>
+
+        <main id="detail-view">
+            <div id="loading-indicator" class="loading">
+                Loading prophecy data...
             </div>
-        </section>
 
-        <section class="fulfillment-section">
-            <h2>New Testament Fulfillment:</h2>
-            <div id="nt-fulfillment-text" class="text-display">
-                Loading...
+            <div id="prophecy-content" style="display: none;">
+                <section class="prophecy-display">
+                    <h3>Prophecy (<span id="ot-ref"></span>)</h3>
+                    <p id="ot-prophecy-text"></p>
+                </section>
+
+                <section class="fulfillment-display">
+                    <h3>Fulfillment (<span id="nt-ref"></span>)</h3>
+                    <p id="nt-fulfillment-text"></p>
+                </section>
             </div>
-        </section>
+        </main>
 
-        <section class="controls-section">
-            <button id="next-button">Next Pair</button>
-        </section>
-    </main>
-
-    <footer>
-        <p>Proof of Concept - Data Embedded</p>
+    </div> <footer>
+        <p>Prototype Version - Data from prophecies.json</p>
     </footer>
 
     <script src="script.js" defer></script>
