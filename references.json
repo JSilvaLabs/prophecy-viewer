@@ -1,0 +1,355 @@
+{
+  "categories": [
+    {
+      "name": "All Categories",
+      "pairs": []
+    },
+    {
+      "name": "Genesis Promises",
+      "pairs": [
+        { "ot_ref": "Genesis 3:15", "nt_ref": "Galatians 4:4", "description": "Protoevangelium: Seed of the woman vs. serpent." },
+        { "ot_ref": "Genesis 3:15", "nt_ref": "Hebrews 2:14", "description": "Protoevangelium: Bruising head/heel - destroying devil's power." },
+        { "ot_ref": "Genesis 3:15", "nt_ref": "1 John 3:8", "description": "Protoevangelium: Destroying devil's works." },
+        { "ot_ref": "Genesis 9:26-27", "nt_ref": "Luke 3:36", "description": "Lineage traced through Shem." },
+        { "ot_ref": "Genesis 12:3", "nt_ref": "Acts 3:25-26", "description": "Seed of Abraham blesses all nations." },
+        { "ot_ref": "Genesis 12:3", "nt_ref": "Galatians 3:8", "description": "Gospel preached beforehand to Abraham." },
+        { "ot_ref": "Genesis 12:7", "nt_ref": "Galatians 3:16", "description": "Promise made specifically to the singular Seed (Christ)." },
+        { "ot_ref": "Genesis 14:18", "nt_ref": "Hebrews 7:1-3", "description": "Melchizedek foreshadows Christ's priesthood." },
+        { "ot_ref": "Genesis 17:19", "nt_ref": "Romans 9:7", "description": "Promise established through Isaac's line." },
+        { "ot_ref": "Genesis 22:8", "nt_ref": "John 1:29", "description": "Abraham's prophecy: God will provide the Lamb." },
+        { "ot_ref": "Genesis 22:18", "nt_ref": "Galatians 3:16", "description": "Blessing to nations through Isaac's Seed (Christ)." },
+        { "ot_ref": "Genesis 26:4", "nt_ref": "Galatians 3:16", "description": "Promise confirmed to Isaac regarding his Seed." },
+        { "ot_ref": "Genesis 28:12", "nt_ref": "John 1:51", "description": "Jacob's Ladder - Connection Heaven/Earth." },
+        { "ot_ref": "Genesis 28:14", "nt_ref": "Luke 3:34", "description": "Blessing through Jacob's Seed (Christ)." },
+        { "ot_ref": "Genesis 49:10", "nt_ref": "Luke 3:33", "description": "Scepter will not depart from Judah." },
+        { "ot_ref": "Genesis 49:10", "nt_ref": "John 11:51-52", "description": "Gathering of people to Shiloh (Messiah)." }
+      ]
+    },
+    {
+      "name": "Covenant Related",
+      "pairs": [
+        { "ot_ref": "2 Samuel 7:12-13", "nt_ref": "Luke 1:32-33", "description": "Davidic Covenant: Descendant's eternal throne established." },
+        { "ot_ref": "2 Samuel 7:16", "nt_ref": "Luke 1:33", "description": "Davidic Covenant: David's house and kingdom endure forever." },
+        { "ot_ref": "Psalms 89:3-4", "nt_ref": "Acts 2:30", "description": "Davidic Covenant: God's oath to seat descendant on throne." },
+        { "ot_ref": "Isaiah 42:6", "nt_ref": "Luke 2:32", "description": "Messiah as a covenant for the people, light to Gentiles." },
+        { "ot_ref": "Isaiah 55:3", "nt_ref": "Acts 13:34", "description": "Everlasting Covenant based on 'sure mercies of David'." },
+        { "ot_ref": "Jeremiah 31:31-34", "nt_ref": "Hebrews 8:8-12", "description": "Prophecy of a New Covenant distinct from Mosaic." },
+        { "ot_ref": "Jeremiah 31:31-34", "nt_ref": "Matthew 26:28", "description": "New Covenant established through Christ's blood for forgiveness." },
+        { "ot_ref": "Jeremiah 31:31-34", "nt_ref": "Hebrews 10:16-17", "description": "New Covenant: Law written on hearts, sins remembered no more." }
+      ]
+    },
+    {
+      "name": "Messiah's Divine Nature/Pre-existence",
+      "pairs": [
+        { "ot_ref": "Psalms 2:7", "nt_ref": "Acts 13:33", "description": "Decree: 'You are my Son; today I have begotten You.'" },
+        { "ot_ref": "Psalms 45:6-7", "nt_ref": "Hebrews 1:8-9", "description": "Address to the Son: 'Your throne, O God, will last forever.'" },
+        { "ot_ref": "Psalms 102:25-27", "nt_ref": "Hebrews 1:10-12", "description": "The Son as the unchanging Creator of heavens and earth." },
+        { "ot_ref": "Psalms 110:1", "nt_ref": "Matthew 22:44", "description": "David calls the Messiah 'my Lord'." },
+        { "ot_ref": "Proverbs 8:22-23", "nt_ref": "John 1:1-2", "description": "Wisdom (applied to Christ) existing before creation." },
+        { "ot_ref": "Isaiah 7:14", "nt_ref": "Matthew 1:23", "description": "Name 'Immanuel' meaning 'God with Us'." },
+        { "ot_ref": "Isaiah 9:6", "nt_ref": "John 1:1, 14", "description": "Titles: 'Mighty God, Everlasting Father'." },
+        { "ot_ref": "Isaiah 43:11", "nt_ref": "Acts 4:12", "description": "The LORD declares He is the only Savior." },
+        { "ot_ref": "Isaiah 44:6", "nt_ref": "Revelation 1:17-18", "description": "The LORD as the First and the Last." },
+        { "ot_ref": "Isaiah 48:16", "nt_ref": "John 1:1-2", "description": "The Sent One present with God from the beginning (interpretation)." },
+        { "ot_ref": "Jeremiah 23:6", "nt_ref": "1 Corinthians 1:30", "description": "Messiah named 'The LORD Our Righteousness'." },
+        { "ot_ref": "Micah 5:2", "nt_ref": "John 8:58", "description": "Messiah's origins described as 'from of old, from everlasting'." },
+        { "ot_ref": "Exodus 3:14", "nt_ref": "John 8:58", "description": "Jesus uses the divine name 'I AM'." }
+      ]
+    },
+     {
+      "name": "Messiah's Human Nature",
+      "pairs": [
+        { "ot_ref": "Genesis 3:15", "nt_ref": "Galatians 4:4", "description": "Born of a human woman." },
+        { "ot_ref": "Genesis 49:10", "nt_ref": "Hebrews 7:14", "description": "Descended from the human tribe of Judah." },
+        { "ot_ref": "Isaiah 11:1", "nt_ref": "Luke 3:23-32", "description": "Human lineage traced to Jesse/David." },
+        { "ot_ref": "2 Samuel 7:12", "nt_ref": "Matthew 1:1", "description": "Human lineage traced to David." },
+        { "ot_ref": "Isaiah 53:2", "nt_ref": "Luke 2:7", "description": "Experienced normal human growth from humble beginnings." },
+        { "ot_ref": "Psalms 8:4-6", "nt_ref": "Hebrews 2:9", "description": "Made 'a little lower than the angels' (humanity)." }
+      ]
+    },
+    {
+      "name": "Birth & Childhood",
+      "pairs": [
+        { "ot_ref": "Isaiah 7:14", "nt_ref": "Matthew 1:22-23", "description": "Born of a virgin." },
+        { "ot_ref": "Micah 5:2", "nt_ref": "Matthew 2:1", "description": "Specific birthplace: Bethlehem." },
+        { "ot_ref": "Daniel 9:25", "nt_ref": "Luke 2:1-2", "description": "Timing related to decree to restore Jerusalem." },
+        { "ot_ref": "Numbers 24:17", "nt_ref": "Matthew 2:1-2", "description": "A star signifies His coming." },
+        { "ot_ref": "Psalms 72:10-11", "nt_ref": "Matthew 2:11", "description": "Gentile kings/magi bring gifts." },
+        { "ot_ref": "Jeremiah 31:15", "nt_ref": "Matthew 2:16-18", "description": "Massacre of children attempt on His life." },
+        { "ot_ref": "Hosea 11:1", "nt_ref": "Matthew 2:14-15", "description": "Sojourn in and return from Egypt." },
+        { "ot_ref": "Isaiah 11:1", "nt_ref": "Matthew 2:23", "description": "Associated with Nazareth ('Nazarene')." }
+      ]
+    },
+    {
+      "name": "Forerunner (John the Baptist)",
+      "pairs": [
+        { "ot_ref": "Isaiah 40:3-5", "nt_ref": "Matthew 3:1-3", "description": "A voice preparing the way in the wilderness." },
+        { "ot_ref": "Malachi 3:1", "nt_ref": "Mark 1:2-3", "description": "God sends messenger ahead of the Lord." },
+        { "ot_ref": "Malachi 4:5-6", "nt_ref": "Matthew 11:14", "description": "Forerunner identified with Elijah." }
+      ]
+    },
+    {
+      "name": "Anointing & Spirit",
+      "pairs": [
+        { "ot_ref": "Psalms 45:7", "nt_ref": "Hebrews 1:9", "description": "Anointed by God 'with the oil of joy'." },
+        { "ot_ref": "Isaiah 11:2", "nt_ref": "Matthew 3:16-17", "description": "The Spirit of the LORD rests upon Him (at baptism)." },
+        { "ot_ref": "Isaiah 42:1", "nt_ref": "Matthew 12:17-18", "description": "God puts His Spirit on His chosen Servant." },
+        { "ot_ref": "Isaiah 61:1-2", "nt_ref": "Luke 4:18-19", "description": "Spirit anoints Him to preach good news (Jesus reads in synagogue)." },
+        { "ot_ref": "Joel 2:28-29", "nt_ref": "Acts 2:16-18, 33", "description": "He pours out the promised Spirit after exaltation." }
+      ]
+    },
+     {
+      "name": "Prophet Like Moses",
+      "pairs": [
+        { "ot_ref": "Deuteronomy 18:15", "nt_ref": "Acts 3:22", "description": "God raises up a Prophet like Moses." },
+        { "ot_ref": "Deuteronomy 18:18-19", "nt_ref": "John 12:49-50", "description": "Speaks God's words; must be obeyed." }
+      ]
+    },
+     {
+      "name": "Priestly Messiah (Melchizedek)",
+      "pairs": [
+        { "ot_ref": "Genesis 14:18", "nt_ref": "Hebrews 7:1-3", "description": "Melchizedek Order typology." },
+        { "ot_ref": "Psalms 110:4", "nt_ref": "Hebrews 5:5-6", "description": "Declared 'Priest forever in the order of Melchizedek'." },
+        { "ot_ref": "Zechariah 6:13", "nt_ref": "Hebrews 8:1", "description": "Serves as Priest upon His heavenly throne." },
+        { "ot_ref": "1 Samuel 2:35", "nt_ref": "Hebrews 2:17", "description": "God promises a 'faithful priest'." }
+      ]
+    },
+     {
+      "name": "Kingly Messiah (Davidic King)",
+      "pairs": [
+        { "ot_ref": "Genesis 49:10", "nt_ref": "Revelation 5:5", "description": "Lion of Judah." },
+        { "ot_ref": "Numbers 24:17", "nt_ref": "Revelation 22:16", "description": "Star out of Jacob, Root of David." },
+        { "ot_ref": "2 Samuel 7:12-13", "nt_ref": "Luke 1:32-33", "description": "Eternal throne from David's line." },
+        { "ot_ref": "Psalms 2:6", "nt_ref": "John 12:13", "description": "God's installed King." },
+        { "ot_ref": "Psalms 89:3-4", "nt_ref": "Acts 2:30", "description": "Davidic covenant confirmed by oath." },
+        { "ot_ref": "Isaiah 9:7", "nt_ref": "Luke 1:33", "description": "Everlasting government on David's throne." },
+        { "ot_ref": "Isaiah 11:1", "nt_ref": "Romans 15:12", "description": "Root of Jesse." },
+        { "ot_ref": "Jeremiah 23:5-6", "nt_ref": "Luke 1:32-33", "description": "Righteous Branch of David reigns." },
+        { "ot_ref": "Daniel 7:14", "nt_ref": "Matthew 28:18", "description": "Given everlasting dominion and authority." },
+        { "ot_ref": "Zechariah 9:9", "nt_ref": "Matthew 21:4-5" , "description": "Triumphal entry: King arrives humbly."}
+      ]
+    },
+    {
+      "name": "Ministry in Galilee",
+      "pairs": [
+        { "ot_ref": "Isaiah 9:1-2", "nt_ref": "Matthew 4:13-16", "description": "Ministry begins in Galilee of the Gentiles." }
+      ]
+    },
+     {
+      "name": "Teaching & Parables",
+      "pairs": [
+        { "ot_ref": "Psalms 78:2", "nt_ref": "Matthew 13:34-35", "description": "Method of teaching includes parables." },
+        { "ot_ref": "Isaiah 29:13", "nt_ref": "Matthew 15:7-9", "description": "Condemns hypocrisy and man-made traditions." },
+        { "ot_ref": "Isaiah 6:9-10", "nt_ref": "Matthew 13:13-15", "description": "Purpose of parables: reveal truth to some, hide from others." }
+      ]
+    },
+     {
+      "name": "Miracles & Healing",
+      "pairs": [
+        { "ot_ref": "Isaiah 35:5-6", "nt_ref": "Matthew 11:4-5", "description": "Performs healings: blind see, deaf hear, lame walk." },
+        { "ot_ref": "Isaiah 42:7", "nt_ref": "Luke 4:18", "description": "Opens eyes of the blind." },
+        { "ot_ref": "Isaiah 29:18-19", "nt_ref": "Matthew 11:5", "description": "Miracles confirm message to the poor/humble." }
+      ]
+    },
+    {
+      "name": "Light to Gentiles / Nations",
+      "pairs": [
+        { "ot_ref": "Genesis 12:3", "nt_ref": "Galatians 3:8", "description": "Abrahamic promise includes blessing for Gentiles." },
+        { "ot_ref": "Psalms 2:8", "nt_ref": "Acts 13:33", "description": "Given nations as inheritance." },
+        { "ot_ref": "Isaiah 11:10", "nt_ref": "Romans 15:12", "description": "Gentiles will hope in the Root of Jesse." },
+        { "ot_ref": "Isaiah 42:1", "nt_ref": "Matthew 12:21", "description": "Gentiles hope in His Name." },
+        { "ot_ref": "Isaiah 42:6", "nt_ref": "Luke 2:32", "description": "Given as a light to the Gentiles." },
+        { "ot_ref": "Isaiah 49:6", "nt_ref": "Acts 13:47", "description": "Brings salvation to the ends of the earth." },
+        { "ot_ref": "Isaiah 52:15", "nt_ref": "Romans 15:21", "description": "Gentiles understand what they weren't told." },
+        { "ot_ref": "Isaiah 60:3", "nt_ref": "Matthew 2:1-2, 11", "description": "Nations (Magi) come to His light." }
+      ]
+    },
+     {
+      "name": "Rejection by Israel",
+      "pairs": [
+        { "ot_ref": "Psalms 69:8", "nt_ref": "John 1:11", "description": "Rejected by His own people." },
+        { "ot_ref": "Psalms 118:22", "nt_ref": "Matthew 21:42", "description": "The Stone rejected by the builders." },
+        { "ot_ref": "Isaiah 8:14", "nt_ref": "1 Peter 2:8", "description": "A stone causing Israel to stumble." },
+        { "ot_ref": "Isaiah 53:1", "nt_ref": "John 12:37-38", "description": "His message/report not believed." },
+        { "ot_ref": "Isaiah 53:3", "nt_ref": "Luke 23:18", "description": "Despised, esteemed not." },
+        { "ot_ref": "Isaiah 65:2", "nt_ref": "Romans 10:21", "description": "God holds out hands to a disobedient people." }
+      ]
+    },
+     {
+      "name": "Betrayal & Trial",
+      "pairs": [
+        { "ot_ref": "Psalms 35:11", "nt_ref": "Mark 14:57", "description": "False witnesses testify against Him." },
+        { "ot_ref": "Psalms 41:9", "nt_ref": "John 13:18", "description": "Betrayed by a close friend sharing bread (Judas)." },
+        { "ot_ref": "Psalms 55:12-14", "nt_ref": "John 13:21", "description": "Betrayal by a familiar companion." },
+        { "ot_ref": "Zechariah 11:12", "nt_ref": "Matthew 26:15", "description": "Betrayal price set at 30 pieces of silver." },
+        { "ot_ref": "Zechariah 11:13", "nt_ref": "Matthew 27:5-7", "description": "Betrayal money used to buy Potter's Field." },
+        { "ot_ref": "Zechariah 13:7", "nt_ref": "Matthew 26:31, 56", "description": "Disciples scattered when Shepherd struck." }
+      ]
+    },
+    {
+      "name": "Suffering Servant (Isaiah 53)",
+      "pairs": [
+        { "ot_ref": "Isaiah 52:14", "nt_ref": "Philippians 2:7-8", "description": "Appearance marred beyond human likeness." },
+        { "ot_ref": "Isaiah 53:1", "nt_ref": "John 12:38", "description": "Report concerning Him not believed." },
+        { "ot_ref": "Isaiah 53:2", "nt_ref": "Luke 2:7", "description": "Grew up in obscurity, humble beginnings." },
+        { "ot_ref": "Isaiah 53:3", "nt_ref": "Luke 9:22", "description": "Despised, rejected, man of sorrows." },
+        { "ot_ref": "Isaiah 53:4", "nt_ref": "Matthew 8:17", "description": "Bore our griefs and carried our sorrows." },
+        { "ot_ref": "Isaiah 53:5", "nt_ref": "Romans 4:25", "description": "Wounded for our transgressions." },
+        { "ot_ref": "Isaiah 53:5", "nt_ref": "1 Peter 2:24", "description": "By His stripes (wounds) we are healed." },
+        { "ot_ref": "Isaiah 53:6", "nt_ref": "Romans 5:8", "description": "Lord laid on Him the iniquity of us all." },
+        { "ot_ref": "Isaiah 53:7", "nt_ref": "Matthew 27:12-14", "description": "Oppressed and afflicted, yet silent." },
+        { "ot_ref": "Isaiah 53:8", "nt_ref": "Acts 8:32-33", "description": "Taken away by oppressive judgment." },
+        { "ot_ref": "Isaiah 53:9", "nt_ref": "Matthew 27:57-60", "description": "Buried in a rich man's tomb despite innocence." },
+        { "ot_ref": "Isaiah 53:10", "nt_ref": "2 Corinthians 5:21", "description": "His life made a guilt offering." },
+        { "ot_ref": "Isaiah 53:11", "nt_ref": "Romans 5:19", "description": "Righteous Servant justifies many." },
+        { "ot_ref": "Isaiah 53:12", "nt_ref": "Mark 15:28", "description": "Numbered with the transgressors." },
+        { "ot_ref": "Isaiah 53:12", "nt_ref": "Luke 23:34", "description": "Made intercession for transgressors." }
+      ]
+    },
+    {
+      "name": "Psalm 22 (Crucifixion Details)",
+      "pairs": [
+        { "ot_ref": "Psalms 22:1", "nt_ref": "Matthew 27:46", "description": "Cry of dereliction: 'My God, why...'" },
+        { "ot_ref": "Psalms 22:7-8", "nt_ref": "Luke 23:35", "description": "Mocked by onlookers: 'He trusts in God...'" },
+        { "ot_ref": "Psalms 22:14", "nt_ref": "John 19:34", "description": "Poured out like water (side pierced)." },
+        { "ot_ref": "Psalms 22:15", "nt_ref": "John 19:28", "description": "Extreme thirst on the cross." },
+        { "ot_ref": "Psalms 22:16", "nt_ref": "John 20:25", "description": "Hands and feet pierced." },
+        { "ot_ref": "Psalms 22:17", "nt_ref": "Luke 23:35", "description": "Onlookers stare." },
+        { "ot_ref": "Psalms 22:18", "nt_ref": "John 19:23-24", "description": "Garments divided by lot." }
+      ]
+    },
+    {
+      "name": "Physical Suffering & Mocking",
+      "pairs": [
+        { "ot_ref": "Psalms 35:19", "nt_ref": "John 15:25", "description": "Hated without cause." },
+        { "ot_ref": "Psalms 69:4", "nt_ref": "John 15:25", "description": "Enemies numerous without cause." },
+        { "ot_ref": "Psalms 69:21", "nt_ref": "Matthew 27:34, 48", "description": "Given gall and vinegar." },
+        { "ot_ref": "Isaiah 50:6", "nt_ref": "Matthew 26:67", "description": "Struck and spat upon." },
+        { "ot_ref": "Isaiah 50:6", "nt_ref": "Matthew 27:26", "description": "Back beaten (scourged)." },
+        { "ot_ref": "Micah 5:1", "nt_ref": "Matthew 27:30", "description": "Struck on the cheek." }
+      ]
+    },
+     {
+      "name": "Death & Atonement",
+      "pairs": [
+        { "ot_ref": "Genesis 22:8", "nt_ref": "John 1:29", "description": "The Lamb God provides." },
+        { "ot_ref": "Exodus 12:5", "nt_ref": "1 Peter 1:19", "description": "The unblemished sacrificial Lamb." },
+        { "ot_ref": "Leviticus 17:11", "nt_ref": "Hebrews 9:22", "description": "Atonement through blood." },
+        { "ot_ref": "Psalms 31:5", "nt_ref": "Luke 23:46", "description": "Committing spirit at death." },
+        { "ot_ref": "Psalms 34:20", "nt_ref": "John 19:36", "description": "Bones not broken." },
+        { "ot_ref": "Isaiah 53:5", "nt_ref": "Romans 5:8", "description": "Sacrificial death for sinners." },
+        { "ot_ref": "Isaiah 53:8", "nt_ref": "Acts 8:33", "description": "Cut off from the living." },
+        { "ot_ref": "Isaiah 53:10", "nt_ref": "Hebrews 9:28", "description": "Life as a guilt offering." },
+        { "ot_ref": "Isaiah 53:12", "nt_ref": "Mark 15:28", "description": "Counted among criminals." },
+        { "ot_ref": "Daniel 9:26", "nt_ref": "Mark 9:12", "description": "The Anointed One killed." },
+        { "ot_ref": "Zechariah 12:10", "nt_ref": "John 19:34, 37", "description": "Body pierced." },
+        { "ot_ref": "Zechariah 13:1", "nt_ref": "1 John 1:7", "description": "Fountain Cleanses Sin." },
+        { "ot_ref": "Amos 8:9", "nt_ref": "Matthew 27:45", "description": "Supernatural darkness at crucifixion." }
+      ]
+    },
+     {
+      "name": "Resurrection",
+      "pairs": [
+        { "ot_ref": "Job 19:25-27", "nt_ref": "1 Thessalonians 4:16", "description": "Redeemer lives; bodily resurrection." },
+        { "ot_ref": "Psalms 16:10", "nt_ref": "Acts 2:27, 31", "description": "Soul not abandoned to Sheol; body not see decay." },
+        { "ot_ref": "Psalms 30:3", "nt_ref": "Acts 2:24", "description": "Brought Up From Sheol." },
+        { "ot_ref": "Psalms 49:15", "nt_ref": "Mark 16:6", "description": "Ransomed from the power of Sheol." },
+        { "ot_ref": "Isaiah 26:19", "nt_ref": "1 Corinthians 15:52", "description": "The dead will live and rise." },
+        { "ot_ref": "Hosea 6:2", "nt_ref": "1 Corinthians 15:4", "description": "Revived/Raised on the third day." }
+      ]
+    },
+     {
+      "name": "Ascension & Exaltation",
+      "pairs": [
+        { "ot_ref": "Psalms 16:11", "nt_ref": "Acts 2:33", "description": "Presence and joy at God's right hand." },
+        { "ot_ref": "Psalms 68:18", "nt_ref": "Ephesians 4:8", "description": "Ascended on High, Led Captives." },
+        { "ot_ref": "Psalms 110:1", "nt_ref": "Mark 16:19", "description": "Seated at God's right hand." },
+        { "ot_ref": "Isaiah 52:13", "nt_ref": "Philippians 2:9", "description": "Raised, lifted up, highly exalted." },
+        { "ot_ref": "Daniel 7:13-14", "nt_ref": "Acts 1:9-11", "description": "Ascended into glory." }
+      ]
+    },
+     {
+      "name": "Second Coming Hints / Future Reign",
+      "pairs": [
+        { "ot_ref": "Psalms 2:8-9", "nt_ref": "Revelation 19:15", "description": "Ruling nations." },
+        { "ot_ref": "Psalms 72:8", "nt_ref": "Philippians 2:10-11", "description": "Universal dominion." },
+        { "ot_ref": "Isaiah 9:7", "nt_ref": "Luke 1:33", "description": "Eternal kingdom." },
+        { "ot_ref": "Daniel 2:44", "nt_ref": "Revelation 11:15", "description": "Unending kingdom." },
+        { "ot_ref": "Daniel 7:13-14", "nt_ref": "Matthew 24:30", "description": "Return on clouds." },
+        { "ot_ref": "Zechariah 12:10", "nt_ref": "Revelation 1:7", "description": "Seen by those who pierced Him." },
+        { "ot_ref": "Zechariah 14:4", "nt_ref": "Acts 1:11-12", "description": "Return to Mount of Olives." },
+        { "ot_ref": "Malachi 3:2-3", "nt_ref": "Luke 3:17", "description": "Coming as Judge." }
+      ]
+    },
+    {
+      "name": "Typology: Persons",
+      "pairs": [
+        { "ot_ref": "Genesis 5:24", "nt_ref": "Hebrews 11:5", "description": "Enoch (Type: Taken by God/Ascension)" },
+        { "ot_ref": "Genesis 14:18", "nt_ref": "Hebrews 7:1-3", "description": "Melchizedek (Type: Priest-King)" },
+        { "ot_ref": "Genesis 22:1-14", "nt_ref": "Hebrews 11:17-19", "description": "Isaac (Type: Sacrificial Son)" },
+        { "ot_ref": "Genesis 37-50", "nt_ref": "Acts 7:9-14", "description": "Joseph (Type: Rejected, Exalted Savior)" },
+        { "ot_ref": "Exodus (Moses)", "nt_ref": "Hebrews 3:1-6", "description": "Moses (Type: Prophet, Mediator)" },
+        { "ot_ref": "Joshua", "nt_ref": "Hebrews 4:8-10", "description": "Joshua/Yeshua (Type: Leads into Rest)" },
+        { "ot_ref": "David", "nt_ref": "Acts 13:22-23", "description": "David (Type: King, Ancestor)" },
+        { "ot_ref": "Jonah 1:17", "nt_ref": "Matthew 12:40", "description": "Jonah (Type: Death/Resurrection)" },
+        { "ot_ref": "Adam", "nt_ref": "Romans 5:14", "description": "Adam (Type: Federal Head)" }
+      ]
+    },
+    {
+      "name": "Typology: Events/Objects",
+      "pairs": [
+        { "ot_ref": "Genesis 28:12", "nt_ref": "John 1:51", "description": "Jacob's Ladder (Type: Access to Heaven)" },
+        { "ot_ref": "Exodus 12", "nt_ref": "1 Corinthians 5:7", "description": "Passover Lamb (Type: Atoning Sacrifice)" },
+        { "ot_ref": "Exodus 14", "nt_ref": "1 Corinthians 10:1-2", "description": "Red Sea Crossing (Type: Deliverance)" },
+        { "ot_ref": "Exodus 16", "nt_ref": "John 6:31-35", "description": "Manna (Type: Bread of Life)" },
+        { "ot_ref": "Exodus 17:6", "nt_ref": "1 Corinthians 10:4", "description": "Water from Rock (Type: Spiritual Drink)" },
+        { "ot_ref": "Leviticus 16", "nt_ref": "Hebrews 9:7-14", "description": "Day of Atonement (Type: Atonement)" },
+        { "ot_ref": "Numbers 21:9", "nt_ref": "John 3:14", "description": "Bronze Serpent (Type: Lifted Up for Healing)" },
+        { "ot_ref": "Exodus 25-30", "nt_ref": "Hebrews 9:1-14", "description": "Tabernacle/Temple (Type: God's Presence/Access)" },
+        { "ot_ref": "Leviticus (Sacrifices)", "nt_ref": "Hebrews 10:1-10", "description": "Sacrifices (Type: Foreshadowing Christ's Sacrifice)" }
+      ]
+    },
+    {
+        "name": "References from Law (Torah)",
+        "pairs": [
+            { "ot_ref": "Genesis 3:15", "nt_ref": "Galatians 4:4", "description": "Protoevangelium" },
+            { "ot_ref": "Genesis 49:10", "nt_ref": "Revelation 5:5", "description": "Lion of Judah" },
+            { "ot_ref": "Exodus 12:46", "nt_ref": "John 19:36", "description": "Passover Lamb Bones" },
+            { "ot_ref": "Leviticus 17:11", "nt_ref": "Hebrews 9:22", "description": "Blood Atonement" },
+            { "ot_ref": "Numbers 21:9", "nt_ref": "John 3:14", "description": "Bronze Serpent" },
+            { "ot_ref": "Deuteronomy 18:15", "nt_ref": "Acts 3:22", "description": "Prophet Like Moses" }
+        ]
+    },
+    {
+        "name": "References from Prophets (Nevi'im)",
+        "pairs": [
+            { "ot_ref": "2 Samuel 7:12-13", "nt_ref": "Luke 1:32-33", "description": "Davidic Throne" },
+            { "ot_ref": "Isaiah 7:14", "nt_ref": "Matthew 1:23", "description": "Virgin Birth (Isaiah)" },
+            { "ot_ref": "Isaiah 9:1-2", "nt_ref": "Matthew 4:15-16", "description": "Galilee Ministry" },
+            { "ot_ref": "Isaiah 53:5", "nt_ref": "1 Peter 2:24", "description": "Suffering Servant Wounds" },
+            { "ot_ref": "Jeremiah 31:31", "nt_ref": "Hebrews 8:8", "description": "New Covenant (Jeremiah)" },
+            { "ot_ref": "Ezekiel 34:23", "nt_ref": "John 10:11", "description": "One Shepherd (David/Messiah)" },
+            { "ot_ref": "Hosea 11:1", "nt_ref": "Matthew 2:15", "description": "Out of Egypt" },
+            { "ot_ref": "Joel 2:28", "nt_ref": "Acts 2:17", "description": "Spirit Poured Out" },
+            { "ot_ref": "Micah 5:2", "nt_ref": "Matthew 2:1", "description": "Born in Bethlehem (Micah)" },
+            { "ot_ref": "Zechariah 9:9", "nt_ref": "Matthew 21:4-5", "description": "King on Donkey" },
+            { "ot_ref": "Malachi 3:1", "nt_ref": "Mark 1:2", "description": "Messenger Prepares Way" }
+        ]
+    },
+    {
+        "name": "References from Writings (Ketuvim)",
+        "pairs": [
+            { "ot_ref": "Psalms 2:7", "nt_ref": "Acts 13:33", "description": "Son of God (Psalm)" },
+            { "ot_ref": "Psalms 16:10", "nt_ref": "Acts 2:27", "description": "Not See Decay (Psalm)" },
+            { "ot_ref": "Psalms 22:18", "nt_ref": "John 19:24", "description": "Lots for Garments (Psalm)" },
+            { "ot_ref": "Psalms 110:1", "nt_ref": "Matthew 22:44", "description": "Sit at Right Hand (Psalm)" },
+            { "ot_ref": "Psalms 118:22", "nt_ref": "Matthew 21:42", "description": "Rejected Stone (Psalm)" },
+            { "ot_ref": "Proverbs 8:23", "nt_ref": "John 1:1", "description": "Pre-existence (Proverbs)" },
+            { "ot_ref": "Daniel 7:13-14", "nt_ref": "Matthew 26:64", "description": "Son of Man Coming (Daniel)" },
+            { "ot_ref": "Daniel 9:26", "nt_ref": "Mark 9:12", "description": "Anointed One Cut Off (Daniel)" },
+            { "ot_ref": "Job 19:25", "nt_ref": "1 Thessalonians 4:16", "description": "Redeemer Lives (Job)" },
+            { "ot_ref": "Ruth 4:4-10", "nt_ref": "Ephesians 1:7", "description": "Kinsman Redeemer (Ruth)" }
+        ]
+    }
+  ]
+}
